@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生 JS Ajax 获取JSON数据</title>
+    <link rel="stylesheet" href="./CSS/reset.css">
+    <style>
+        #show {
+            border: 1px solid #f00;
+            height:100%;
+            min-width:1024px;
+            /* overflow: hidden; */
+        }
+        #show>ul>li{
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #fff;
+
+        }
+        #show>ul{
+            width: 100%;
+            overflow: hidden;
+        }
+        #show>ul>li>a{
+            color: #fff;
+            background-color: #666;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            margin-left: 1px;
+        }
+        #show>ul>li:nth-child(1), #show>ul>li:nth-child(3){
+            width: 5%;
+        }
+        #show>ul>li:nth-child(2),#show>ul>li:nth-child(5){
+            width: 10%;
+        }
+        #show>ul>li:nth-child(4),#show>ul>li:nth-child(6){
+            width: 20%;
+        }
+        #show>ul>li:nth-child(7){
+            width: 30%;
+        }
+        #content>ul{
+            width: 100%;
+            overflow: hidden;
+        }
+        #content>ul>li>a{
+            color: #fff;
+            background-color: #666;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            margin-left: 1px;
+        }
+        #content>ul>li{
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #f00;
+        }
+        #content>ul>li>a{
+            color: #fff;
+            background-color: #666;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            margin-left: 1px;
+        }
+        
+    </style>
+</head>
+<body>
+    <button>GET请求JSON数据</button>
+    <div id="show"></div>
+</body>
+<script>
+     function createList(id,tdata){
+    var wrapper = document.getElementById(id);
+    var t_head = document.createElement('ul');
+    for(var i=0;i<tdata.length;i++){
+        var rol = document.createElement('li');
+        var a_el = document.createElement('a');
+        a_el.innerText=tdata[i];
+        a_el.setAttribute('href','javascript:void(0);');
+        rol.appendChild(a_el);
+        t_head.appendChild(rol);
+    }
+             wrapper.appendChild(t_head);
+             var comtent = document.createElement('div');
+              comtent.setAttribute('id','content');
+              wrapper.appendChild(comtent)
+     }
+     function addrow(id,data){
+              var row=document.createElement('ul');
+              data.unshift('');
+              for(var i=0;i<data.length;i++){
+                    var col = document.createElement('li');
+                    var a_el = document.createElement('a');
+                    a_el.innerText= data[i];
+                    a_el.setAttribute('href','javascript:void(0);');
+                    col.appendChild(a_el);
+                    row.appendChild(col);
+                    // console.log(data[j]);
+              }
+
+              document.getElementById(id).appendChild(row);
+              
+     }
+
+
+    //1.1 首先要获取数据 服务器数据
+    //1.2 使用原生js中的技术 (无刷新技术)
+    function initUI(){
+        var btn=document.getElementsByTagName('button')[0];
+        btn.onclick=function(){
+            //声明原生js Ajax对象
+            var xhr=null; 
+            if(window.XMLHttpRequest){//主流浏览器自带
+               xhr=new XMLHttpRequest();
+            }else{//IE5 6
+               xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            //1.4配置请求
+            var url='http://127.0.0.1:8885/getdata';
+            xhr.open('GET',url,true);
+            xhr.send();
+            xhr.onreadystatechange=function(){
+                if(4==xhr.readyState){
+                    if(200==xhr.status){//服务器准备好
+                    // console.log(xhr.responseText);
+                       //uname  time openBank 
+                       var obj=JSON.parse(xhr.responseText);
+                       console.log(obj);
+                       for(var i=0;i<obj.length;i++){
+                           var itme =obj[i];
+                           var dd=[];
+                           dd.push(itme['uname']);
+                           dd.push(itme['uid']);
+                           dd.push(itme['uidnumber']);
+                           dd.push(itme['time']);
+                           dd.push(itme['zhanghao']);
+                           dd.push(itme['openBank']);
+                            addrow('content',dd);
+                           
+                       }
+
+                    }
+                }
+            }
+        }
+
+
+        //动态添加数据
+        var dd=['全选','用户ID','客户名','身份证ID','开户行','卡号','开户时间'];
+        createList('show',dd);
+    }
+    window.onload = initUI;
+</script>
+</html>

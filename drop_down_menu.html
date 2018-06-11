@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生js实现的下拉菜单</title>
+    <link rel="stylesheet" href="./CSS/reset.css">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="nav_header">
+        <!-- ul>li>ul>li*4>a[href=javascript:void(0);]{栏目$} 一个ul下面再来一个li下面再来一个
+            ul再来4个li每个li下面再来一个a每个a里面的内容是栏目 $计数  -->
+        <ul id="navigation">
+            <li>
+                <input id="u_input" type="text" placeholder="请输入文字">
+                <ul class="items">
+                    <li>
+                        <a href="javascript:void(0);">栏目1</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">栏目2</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">栏目3</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">栏目4</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    function inita() {
+        var items = document.getElementsByClassName('items')[0];
+        items.style.display='none';
+        var iems_a = document.getElementsByClassName('items')[0].getElementsByTagName('a');
+    for (var i = 0; i < iems_a.length; i++) {
+        iems_a[i].onclick = function () {
+            var iems_a_text = this.innerText;
+            document.getElementById('u_input').value = iems_a_text;
+            var itemss = document.getElementsByClassName('items')[0];
+            itemss.style.display = 'none';
+        }
+    }
+    }
+    window.onload = inita;
+    var li_el = document.getElementById('navigation').getElementsByTagName('li')[0];
+    li_el.addEventListener('mouseover', function () {
+        var ul_el = this.getElementsByTagName('ul')[0];
+        ul_el.style.display = 'block';
+    }, true);
+    li_el.addEventListener('mouseout', function () {
+        var ul_el = this.getElementsByTagName('ul')[0];
+        ul_el.style.display = 'none';
+    }, true);
+
+    
+</script>
+
+</html>

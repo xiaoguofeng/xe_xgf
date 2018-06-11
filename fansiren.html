@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./CSS/reset.css">
+    <title>Document</title>
+    <style>
+       input{
+           height: 40px;
+           /* width: ; */
+           margin-right: 20px;
+           font-size: 12px;
+           
+       }
+       #c3_header>ul>li>ul>li{
+           text-align: right;
+           background-color: #f00;
+
+       }
+    </style>
+</head>
+
+<body>
+    <div id="show">
+        <div id="c3_header">
+
+        </div>
+        <div id="c3_body">
+
+        </div>
+    </div>
+</body>
+<script>
+    function textLeft(text) {
+        var lab = document.createElement('label');
+        lab.style.display='inline-block';
+        lab.style.width='120px';
+        var txt = text + ':';
+        lab.innerText = txt;
+        //样式
+        return lab;
+    }
+
+    function searchInput(text) {
+        var s_input = document.createElement('input');
+        s_input.setAttribute('type', 'text');
+        s_input.setAttribute('placeholder', text);
+        return s_input;
+    }
+
+    function createlines(id, datas) {
+        //创建外层
+        var ul_wrapper = document.createElement('ul');
+        var li_row = document.createElement('li');
+        var ul_row = document.createElement('ul');
+        for (var i = 0; i < 3; i++) {
+            var col = document.createElement('li');
+            if (0 == i) {
+                var lab = textLeft(datas['row11']['name']);
+                var input = searchInput(datas['row11']['val']);
+                col.appendChild(lab);
+                col.appendChild(input);
+            } else if (1 == i) {
+                var sbtn = document.createElement('button');
+                var abtn = document.createElement('button');
+                sbtn.innerText = '搜索';
+                abtn.innerText = '添加';
+                col.appendChild(sbtn);
+                col.appendChild(abtn);
+            } else {
+                col.style.display = 'none';
+            }
+            ul_row.appendChild(col);
+        }
+        li_row.appendChild(ul_row);
+        ul_wrapper.appendChild(li_row);
+        document.getElementById(id).appendChild(ul_wrapper);
+    }
+    function createClos(id,datas){
+        var cols=datas['datas'].length;
+        var rows=Math.ceil(cols/3);
+        var ul_wrapper =document.createElement('ul');
+        for(var i=0;i<rows;i++){
+            (function(num){
+                 var li_row=document.createElement('li');
+                 var ul_row=document.createElement('ul');
+                 for(var j=0;j<3;j++){
+                     var col = document.createElement('li');
+                     col.style.display='inline-block';
+                     if((num*3+j)<cols){
+                        var text = textLeft(datas['datas'][num*3+j]['row']['name']);
+                     var input = searchInput(datas['datas'][num*3+j]['row']['val']);
+                     col.appendChild(text);
+                     col.appendChild(input);
+                     }else{
+                         col.style.display='none';
+                     }
+                   
+                     ul_row.appendChild(col);
+                 }
+                 ul_row.style.overflow='hidden';
+                 ul_row.style.border='1px solid red';
+                 li_row.appendChild(ul_row);
+                 ul_wrapper.appendChild(li_row); 
+
+            })(i)
+            
+        }
+        
+         document.getElementById(id).appendChild(ul_wrapper);
+    }
+    function createHeader(lines, id, datas) {
+        switch (lines) {
+            case 0:
+
+                break;
+            case 1:
+                {
+                    //创建ul
+                    createlines(id, datas);
+                    break;
+                }
+            default:
+                {
+                    createClos(id, datas);
+                }
+                break;
+        }
+    }
+         function initEl() {
+          var dd={
+              datas:[
+                  {row:{name:'ID',val:'搜索'}},
+                  {row:{name:'客户名称',val:'搜索'}},
+                  {row:{name:'贷款银行',val:'搜索'}},
+                  {row:{name:'收款账号',val:'搜索'}},
+                  {row:{name:'开户行',val:'搜索'}},
+                  {row:{name:'市场开发人员',val:'搜索'}},
+                  {row:{name:'市场维护人员',val:'搜索'}},
+                  {row:{name:'介入时机',val:'搜索'}},
+                  {row:{name:'搜索',val:'搜索'}}
+              ]
+          }
+          createClos('c3_header',dd)
+        }
+        window.onload = initEl;
+        // var ss=Math.floor((7-7/3)%3);
+        // console.log(1);
+</script>
+
+</html>

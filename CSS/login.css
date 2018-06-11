@@ -1,0 +1,148 @@
+@charset 'utf-8';
+
+
+/* 设置登录区域 begin */
+.xe-main {
+     background: url('../sources/images/bgi.jpg') no-repeat;
+     background-size: 100% 600px;
+     height: 600px;
+     min-width: 960px;
+}
+.main-box {
+    height: 560px;
+    margin: 0 auto;
+    padding-top: 140px;
+    width: 960px;
+}
+.login-box{
+    background: #fff;
+    height: 260px;
+    box-shadow: #666 0 0 3px;
+    margin-left: 710px;
+    width: 240px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.login-box > h3{
+       color: #2887d7;
+       font-size: 20px;
+       font-weight: normal;
+       margin-bottom: 20px;
+}
+
+#login_menu>li:nth-child(1){
+        position: relative;
+} 
+#login_menu>li:nth-child(2){
+    position: relative;
+} 
+#login_menu>li:nth-child(4){
+         font-size: 12px;
+         color: #909090;
+} 
+#login_menu>li:nth-child(4) a{
+    /* margin-left: 30px; */
+}
+#login_menu>li:nth-child(4) span{
+    margin-right: 12px;
+}
+#login_menu>li:nth-child(4) input{
+    vertical-align: middle;
+}
+#login{
+   margin-top: 20px;
+   width: 220px;
+   height: 30px;
+   background-color: #18a2e0;
+   border: 1px solid #18a2e0;
+   border-radius: 2px;
+   box-shadow: 0;
+   font-size: 18px;
+   color: #fffdf0;
+   letter-spacing: 14px;
+}
+#u_name,#u_password{
+    height: 20px;
+    padding: 8px 0px;
+    margin-bottom: 10px;
+    width: 90%;
+    font-size: 18px;
+    color: #666;
+    outline:none;
+    text-indent: 30px;
+}
+#u_name+span{
+    display:inline-block;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url('../sources/images/yonghu.png');
+    
+}
+#u_password+span{
+    display:inline-block;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url('../sources/images/mima.png');
+}
+.verify-code{
+    float: right;
+    margin-right: 20px;
+}
+.verify-input-area{
+    width: 100px!important;
+}
+.varify-input-code{
+    height: 28px!important;
+}
+.verify-change-area{
+    display: none;
+}
+
+/* 设置登录区域 end */
+
+
+
+
+
+
+.xe-header{
+    height: 80px;
+    line-height:80px;
+}
+.xe-logo{
+    margin-left: 30px;
+    width: 500px;
+    height: 100px;
+    float: left;
+}
+.xe-logo h1,h2{
+    display: inline-block;
+   margin-left: 10px;
+   color: #2788d9;
+}
+.xe-help{
+    height: 100px;
+    display: inline-block;
+    float: right;
+
+    padding-right: 20px;
+     font-size: 12px;
+     color: #2c2c2c;
+}
+.xe-help>span:nth-child(1){
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background:url('../sources/images/shezhi.png') no-repeat center;
+}
+.xe-footer{
+    margin-top: 50px;
+    margin-left: 70px;
+    color: #d7d7d7;
+}

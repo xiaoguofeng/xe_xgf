@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>手风琴-竖向</title>
+    <style>
+    body,{
+        padding: 0;
+        margin: 0;
+        font-family: "微软雅黑";
+    }
+    ul,li{
+        list-style: none;
+        font-family: "微软雅黑";
+    }
+    li{
+        width: 80px;
+        height: 40px;
+        background-color: #f00;
+    }
+    </style>
+</head>
+<body>
+    <div id="index">
+         <ul id="global_nav">
+             <li><a href="javascript:void(0);">1</a>
+               <ul>
+                   <li>11</li>
+                   <li>12</li>
+                   <li>13</li>
+               </ul>
+             </li>
+             <li><a href="javascript:void(0);">2</a>
+                <ul>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                </ul>
+             </li>
+             <li><a href="javascript:void(0);">3</a>
+                 <ul>
+                     <li>31</li>
+                     <li>32</li>
+                     <li>33</li>
+                     <li>34</li>
+                     <li>35</li>
+                 </ul>
+             </li>
+             <li>
+                 <a href="javascript:void(0);"4></a>
+                 <ul>
+                     <li>41</li>
+                     <li>42</li>
+                     <li>43</li>
+                     <li>44</li>
+                     <li>45</li>
+                     <li>46</li>
+                 </ul>
+             </li>
+             <li></li>
+             <li></li>
+         </ul>
+    </div>
+</body>
+<script>
+    function initTree(t) {
+        var tree=document.getElementById(t);
+        var lists=tree.getElementsByTagName('li');
+        for( var i=0;i<lists.length;i++){
+             var item=lists[i];
+             (function(num){
+                 var sub_ul=item.getElementsByTagName('ul');
+                 var a_el=item.getElementsByTagName('a');
+                 if(sub_ul.length!=0){
+                     sub_ul[0].style.display='none';
+                  a_el[0].onclick=function(){
+                   if(sub_ul[0].style.display=='block'){
+                    sub_ul[0].style.display='none';
+                   }else{
+                    sub_ul[0].style.display='block';
+                  }
+                 } 
+                }
+             })(i);
+        }
+        tree.style.display='block';
+        
+    }
+    window.onload=function (){
+            initTree('global_nav');
+    }
+</script>
+</html>
